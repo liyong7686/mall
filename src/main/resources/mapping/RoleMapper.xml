@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyong.dao.RoleMapper">
+
+	<resultMap type="com.liyong.model.Role" id="RoleResult">
+		<result property="id" column="id" />
+		<result property="roleName" column="roleName" />
+		<result property="roleRemark" column="roleRemark" />
+	</resultMap>
+	
+	<insert id="add" parameterType="com.liyong.model.Role">
+		insert into t_role values(#{id},#{roleName},#{roleRemark})
+	</insert>
+		
+	<select id="findById" parameterType="String" resultMap="RoleResult">
+		select * from t_role where id = #{id}
+	</select>
+	
+ 
+    <select id="list" parameterType="Map" resultMap="RoleResult">
+		select * from t_role
+		<where>
+			<if test="q!=null and q!=''">
+				and (roleName like #{q} or roleRemark like #{q}   ) 
+			</if>
+		</where>
+		order by id DESC
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+		select
+		count(*) from t_role
+		<where>
+			<if test="q!=null and q!=''">
+				and (roleName like #{q} or roleRemark like #{q}   ) 
+			</if>
+		</where>
+	</select>
+	
+    <update id="update" parameterType="com.liyong.model.Role">
+		update t_role
+		<set>
+			<if test="roleName !=null and roleName != ''  ">
+				roleName = #{roleName},
+			</if>
+			<if test="roleRemark !=null and roleRemark != ''  ">
+				roleRemark = #{roleRemark},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from t_role where id=#{id}
+	</delete>
+	
+	<update id="deleteRoleMenu" parameterType="com.liyong.model.Role">
+	   update t_role_menu set activity = 0 where activity = 0 and  roleId = #{id}
+	</update>
+	<insert id="addRoleMenu" parameterType="com.liyong.model.RoleMenu">
+		insert into t_role_menu 
+		    (id,roleId,menuId,createTime,activity)
+		value(#{id},#{roleId},#{menuId},sysdate(),#{activity})
+	</insert>
+	<select id="getListRoleMenuByMap" parameterType="Map" resultType="com.liyong.model.RoleMenu">
+	   select * from t_role_menu
+		<where>
+			<if test="roleId !=null and roleId!=''">
+				and roleId = #{roleId}
+			</if>
+			<if test="activity !=null">
+				and activity = #{activity}
+			</if>
+		</where>
+		order by id DESC
+	</select>
+	
+	
+</mapper> 
+
+

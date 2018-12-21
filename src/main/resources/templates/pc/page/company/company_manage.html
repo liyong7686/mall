@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+
+<!-- 强制  高速模式 渲染网页    -->
+<meta NAME=”renderer” content=”webkit”>
+<!-- 强制  高速模式 渲染网页    -->
+<link href="../../../../static/favicon.ico" rel="shortcut icon" />
+<!--添加  jq  支持加载-->
+<script	src="../../../easy-ui/jquery.min.js"></script>
+<!--添加  jq  支持加载-->
+<!--添加 layui  支持加载-->
+<link rel="stylesheet"	href="../../../layui-v2.4.5/layui/css/layui.css">
+<script	src="../../../layui-v2.4.5/layui/layui.js"></script>
+<!--添加 layui  支持加载-->
+
+<!-- 加入移动布局 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+
+<!-- 引入manage 的基础css -->
+<script type="text/javascript"	src="../../../common/manage/manage_base.js"></script>
+<link href="../../../common/manage/manage_base.css" rel="stylesheet"/>
+<!-- 引入manage 的基础css -->
+
+</head>
+<style>
+		body{padding-top:3px;}
+			.hide{display:none}
+</style>
+<body>
+
+
+<div class="layui-form" style="min-width:1000px;">
+
+	<div class="layui-table-toolbar" style="margin-bottom: 3px;">
+		<div class="layui-btn-group">
+		    <button class="layui-btn layui-btn-sm" onclick="add()"><i class="layui-icon">&#xe640;</i>增加</button>
+		  	<button class="layui-btn layui-btn-sm" onclick="delSelected()" ><i class="layui-icon">&#xe640;</i>删除</button>
+		    <button class="layui-btn layui-btn-sm" onclick="reload_data()" ><i class="layui-icon">&#x1002;</i>刷新</button>
+	 	 </div>
+	</div>
+
+	<div class="layui-form layui-form-pane" style="margin-bottom:3px;">
+		<div class="layui-form-item" style="margin-bottom:1px;min-width:1051px;">
+			<label class="layui-form-label">模糊搜索</label>
+			<div class="layui-input-inline">
+				<input type="text" id="q" onkeydown="if(event.keyCode==13) reload_data()"  name="title" lay-verify="title" autocomplete="off" placeholder="模糊搜索" class="layui-input">
+			</div>
+		    <div class="layui-input-inline" style="width:113px;">
+		    	<a class="layui-btn" id="btn-search">查询</a>
+		    </div>
+	    </div>
+	</div>
+	
+</div>
+
+<table class="layui-table layui-form" id="treeTable"></table>
+
+<script type="text/javascript"  th:inline="none">
+
+
+layui.config({
+	base: '../js/',
+})
+layui.use(['treetable','form'],function(){
+	
+	//var data  =[{"id":1,"pid":0,"title":"1-1"},{"id":2,"pid":0,"title":"1-2"},{"id":3,"pid":0,"title":"1-3"},{"id":4,"pid":1,"title":"1-1-1"},{"id":5,"pid":1,"title":"1-1-2"},{"id":6,"pid":2,"title":"1-2-1"},{"id":7,"pid":2,"title":"1-2-3"},{"id":8,"pid":3,"title":"1-3-1"},{"id":9,"pid":3,"title":"1-3-2"},{"id":10,"pid":4,"title":"1-1-1-1"},{"id":11,"pid":4,"title":"1-1-1-2"}];
+	//不知道为啥，非得这样转换下
+		
+	var o = layui.$,treetable = layui.treetable;
+	var form = layui.form,layer = layui.layer;
+	$.post('/company/treeData',{},function(data){
+
+		treetable.render({
+			elem: '#treeTable',
+			data: data,
+			field: 'name',
+			is_checkbox: true,
+			//checked:[1,2,3,4],
+			cols: [
+				{ field: 'name', title: '标题', width: '30%', template: function(item){
+						if(item.level == 1){
+							return '<span style="color:red;">'+item.name+'</span>';
+						}
+						if(item.level == 2){
+							return '<span style="color:green;">'+item.name+'</span>';
+						}
+						return item.name;
+					}
+				}
+				,{ field: 'id', title: 'ID', width: '20%' }
+				,{ field: 'pid', title: '父ID', width: '20%', }
+				,{ title: '状态', width: '20%', template: function(item){
+						return '<input type="checkbox" lay-skin="switch" lay-filter="status" lay-text="开启|关闭">';
+				} }
+				, { field: 'actions', title: '操作', width: '30%', template: function(item){
+						var tem = [];
+						if(item.pid == 0){
+							tem.push('<a class="add-child" lay-filter="add"><i class="layui-icon">&#xe654;</i>添加子级</a>');
+						}
+						tem.push('<a lay-filter="edit"><i class="layui-icon">&#xe640;</i>编辑</a>');
+						if(item.pid > 0){
+							tem.push('<a class="set-attr">设置属性</a>');
+						}
+						return tem.join(' <font>|</font> ')
+					},
+				},
+			]
+		});
+	 
+		
+	},'json'); 
+	
+	treetable.on('treetable(add)',function(data){
+		layer.msg('添加操作');
+		console.dir(data);
+	})
+	
+	treetable.on('treetable(edit)',function(data){
+		layer.msg('编辑操作');
+		console.dir(data);
+	})
+	
+	o('.up-all').click(function(){
+		treetable.all('up');
+	})
+	
+	o('.down-all').click(function(){
+		treetable.all('down');
+	})
+	
+	o('.get-checked').click(function(){
+		console.dir(treetable.all('checked'));
+	})
+	
+	form.on('switch(status)',function(data){
+		layer.msg('监听状态操作');
+		console.dir(data);
+	})
+	
+	
+})
+</script>
+
+
+</body>
+</html>

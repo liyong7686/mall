@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class User {
+	
 	private Integer id;
 	private String num_;//读者号
 	private String trueName;//真实姓名 
@@ -15,16 +16,8 @@ public class User {
 	private Date createDateTime;
 	private String password;//密码
 	private String remark;//备注
-	private Integer type;//1管理员 2读者
+	private Integer type;   // 1、平台管理人员、 2、 商户管理人员
 	
-    private String openid;
-    private String token;
-    private String nickName;
-    private String avatarUrl;
-    private Byte gender;
-    private Long gmtCreate;
-    private Long gmtModified;
-    private Byte status;
 	public Integer getId() {
 		return id;
 	}
@@ -85,55 +78,6 @@ public class User {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public String getOpenid() {
-		return openid;
-	}
-	public void setOpenid(String openid) {
-		this.openid = openid;
-	}
-	public String getToken() {
-		return token;
-	}
-	public void setToken(String token) {
-		this.token = token;
-	}
-	public String getNickName() {
-		return nickName;
-	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-	public String getAvatarUrl() {
-		return avatarUrl;
-	}
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
-	}
-	public Byte getGender() {
-		return gender;
-	}
-	public void setGender(Byte gender) {
-		this.gender = gender;
-	}
-	public Long getGmtCreate() {
-		return gmtCreate;
-	}
-	public void setGmtCreate(Long gmtCreate) {
-		this.gmtCreate = gmtCreate;
-	}
-	public Long getGmtModified() {
-		return gmtModified;
-	}
-	public void setGmtModified(Long gmtModified) {
-		this.gmtModified = gmtModified;
-	}
-	public Byte getStatus() {
-		return status;
-	}
-	public void setStatus(Byte status) {
-		this.status = status;
-	}
-
 	
 	
 }

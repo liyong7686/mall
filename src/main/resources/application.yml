@@ -1,6 +1,7 @@
 spring:
   thymeleaf:
     mode: HTML5
+    cache: false
 logging:
   level:
     org:
@@ -15,7 +16,7 @@ wechat:
 
 # h2
 db:
-  url: jdbc:mysql://119.29.247.66:3306/jiuask?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false
+  url: jdbc:mysql://119.29.247.66:3306/db_book_manage?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false
   username: root
   password: Liyong@123
   driver: com.mysql.jdbc.Driver
