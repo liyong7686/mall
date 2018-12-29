@@ -2,6 +2,7 @@ spring:
   thymeleaf:
     mode: HTML5
     cache: false
+<<<<<<< HEAD
   #配置邮件通知服务    
   mail:
     host: smtp.qq.com
@@ -49,3 +50,23 @@ db:
   driver: com.mysql.jdbc.Driver
 
  
+=======
+logging:
+  level:
+    org:
+      springframework: error
+server:
+  port: ${port:8880}
+
+# 记得替换成你的id和secret
+wechat:
+  appid: wxb051d9c24ff2e763
+  secret: 89edc8fb31f188c7e727279d9b922bb4
+
+# h2
+db:
+  url: jdbc:mysql://119.29.247.66:3306/db_book_manage?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false
+  username: root
+  password: Liyong@123
+  driver: com.mysql.jdbc.Driver
+>>>>>>> branch 'master' of https://github.com/liyong7686/mall.git

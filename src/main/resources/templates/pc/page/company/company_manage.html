@@ -97,6 +97,7 @@ layui.use(['treetable','form'],function(){
 				} }
 				, { field: 'actions', title: '操作', width: '30%', template: function(item){
 						var tem = [];
+<<<<<<< HEAD
 						tem.push('<a class="add-child" lay-filter="add"><i class="layui-icon">&#xe654;</i>添加子级</a>');
 						tem.push('<a lay-filter="edit"><i class="layui-icon">&#xe640;</i>编辑</a>');
 						tem.push('<a class="set-attr">设置属性</a>');
@@ -111,6 +112,26 @@ layui.use(['treetable','form'],function(){
 	
 	treetable.on('treetable(add)',function(data){
 		layer.msg('添加操作' + data.item.id );
+=======
+						if(item.pid == 0){
+							tem.push('<a class="add-child" lay-filter="add"><i class="layui-icon">&#xe654;</i>添加子级</a>');
+						}
+						tem.push('<a lay-filter="edit"><i class="layui-icon">&#xe640;</i>编辑</a>');
+						if(item.pid > 0){
+							tem.push('<a class="set-attr">设置属性</a>');
+						}
+						return tem.join(' <font>|</font> ')
+					},
+				},
+			]
+		});
+	 
+		
+	},'json'); 
+	
+	treetable.on('treetable(add)',function(data){
+		layer.msg('添加操作');
+>>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
 		console.dir(data);
 	})
 	

@@ -16,7 +16,10 @@ public class MallApplication {
 		SpringApplication.run(MallApplication.class, args);
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
 	/*
     @RequestMapping("/")
     String index() {

@@ -50,12 +50,21 @@ function save(){
 		,roleRemark:app.roleRemark
 		,menuIds:checkdMenuIds
 		},function(result){
+<<<<<<< HEAD
 			if(result.status == 1){
 				//调用 父窗口的  关闭所有窗口 并且刷新 页面
 				window.parent.closeDlg(result.message);
 			}else{
 				layer.closeAll();//关闭loading
 				layer.msg(result.message);
+=======
+			if(result.success){
+				//调用 父窗口的  关闭所有窗口 并且刷新 页面
+				window.parent.closeDlg(result.msg);
+			}else{
+				layer.closeAll();//关闭loading
+				layer.msg(result.msg);
+>>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
 			}
 	},'json');	
 }

@@ -89,6 +89,7 @@ function del(ids){
 		  shade: [0.1,'#fff'] //0.1透明度的白色背景
 	});
 	$.post('/menu/delete',{ids:ids},function(result){
+<<<<<<< HEAD
 		if(result.status == 1){
 			layer.closeAll();
 			layer.msg('删除成功');
@@ -96,6 +97,15 @@ function del(ids){
 		}else{
 			layer.closeAll();
 			layer.msg(result.message);
+=======
+		if(result.success){
+			layer.closeAll();
+			layer.msg('删除成功');
+			reload_data();
+		}else{
+			layer.closeAll();
+			layer.msg(result.msg);
+>>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
 		}
 	},'json');
 }

@@ -8,7 +8,11 @@ import lombok.Data;
 
 @Data
 public class ResultDTO {
+<<<<<<< HEAD
     private Integer status; // 1.成功， -1 失败
+=======
+    private Integer status;
+>>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
     private Object data;
     private String message;
 
