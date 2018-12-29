@@ -27,6 +27,7 @@ import com.liyong.service.CompanyService;
 import com.liyong.service.EmailUntilService;
 import com.liyong.service.MenuService;
 import com.liyong.suport.JmsUtil;
+import com.liyong.suport.RedisUtil;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
 
@@ -148,7 +149,13 @@ public class CompanyController {
 			JmsUtil.pushToMsgSenderQueue(objs);
 			JmsUtil.pushToEmployeeQueue(objs);
 			System.out.println("发送推送消息。。。。end....");*/
+			
+			
+			RedisUtil.redisSaveObject("text1", "1-----------------111111");
 
+			Object obj = RedisUtil.redisQueryObject("text1");
+			System.out.println("-------" + obj.toString());
+			
 			Gson g = new Gson();
 			
 			//System.out.println("jsonDate:");

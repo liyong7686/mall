@@ -1,8 +1,8 @@
 spring:
+  #配置html页面模板
   thymeleaf:
     mode: HTML5
     cache: false
-<<<<<<< HEAD
   #配置邮件通知服务    
   mail:
     host: smtp.qq.com
@@ -17,16 +17,30 @@ spring:
           starttls:
             enable: true
             required: true
+  #配置   activemq 消息插件       
   activemq :
       broker-url : tcp://localhost:61616  
       in-memory : true  
       pool :
         enabled : false  
+  #配置 mongodb 文件存储插件
   data:
     mongodb:
       host : 127.0.0.1
       port : 27017
-      database: jesper   
+      database: jesper 
+  #配置   redis 缓存数据库
+  redis:
+    host: 127.0.0.1
+    port: 6379 
+    password : $LY201514P
+    database: 0 
+    timeout : 3000
+    pool:
+        max-active: 8
+        max-wait: 1000
+        max-idle: 8 
+        min-idle: 0      
 logging:
   level:
     org:
@@ -42,31 +56,10 @@ wechat:
   appid: wxb051d9c24ff2e763
   secret: 89edc8fb31f188c7e727279d9b922bb4
 
-# h2
+# 配置mysql 数据库
 db:
   url: jdbc:mysql://119.29.247.66:3306/db_book_manage?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false
   username: root
   password: Liyong@123
   driver: com.mysql.jdbc.Driver
 
- 
-=======
-logging:
-  level:
-    org:
-      springframework: error
-server:
-  port: ${port:8880}
-
-# 记得替换成你的id和secret
-wechat:
-  appid: wxb051d9c24ff2e763
-  secret: 89edc8fb31f188c7e727279d9b922bb4
-
-# h2
-db:
-  url: jdbc:mysql://119.29.247.66:3306/db_book_manage?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false
-  username: root
-  password: Liyong@123
-  driver: com.mysql.jdbc.Driver
->>>>>>> branch 'master' of https://github.com/liyong7686/mall.git

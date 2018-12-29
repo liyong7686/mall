@@ -48,7 +48,6 @@
 		
 		$.post('/user/add', {num_ : reg_num_,trueName:trueName,phone:phone,sex_:sex_,type:2,password :reg_password
 		}, function(result) {
-<<<<<<< HEAD
 			if (result.status == 1) {
 				layer.closeAll();
 				layer.msg('注册成功', {icon: 1});
@@ -89,48 +88,6 @@
 				layer.closeAll();
 				layer.alert(result.message);
 				$("#error").html(result.message);
-=======
-			if (result.success) {
-				layer.closeAll();
-				layer.msg('注册成功', {icon: 1});
-				
-				$("#reg_btn").attr("onclick","void();"); 
-				$("#reg_btn").text("注册成功"); 
-			} else {
-				layer.closeAll();
-				layer.alert(result.msg);
-			}
-		}, 'json');
-	}
-	
-
-	function login() {
-		var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
-		
-		var num_ = $("#num_").val();
-		var password = $("#password").val();
-		
-		if (num_ == null || num_ == "") {
-			layer.closeAll();
-			layer.alert('请输入读者号!');
-			return;
-		}
-		
-		if (password == null || password == "") {
-			layer.closeAll();
-			layer.alert('请输入密码!');
-			return;
-		}
-		
-		$.post('/user/login', {num_ : num_,password : password
-		}, function(result) {
-			if (result.success) {
-				window.location.href = "/admin/main";
-			} else {
-				layer.closeAll();
-				layer.alert(result.msg);
-				$("#error").html(result.msg);
->>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
 			}
 		}, 'json');
 		

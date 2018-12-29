@@ -12,7 +12,6 @@
 		<result property="password" column="password" />
 		<result property="remark" column="remark" />
 		<result property="type" column="type" />
-<<<<<<< HEAD
 		<result property="token" column="token" />
 		<result property="openId" column="openId" />
 	</resultMap>
@@ -52,39 +51,6 @@
 			</if>
 			<if test="openId != null  ">
 				openId = #{openId},
-=======
-	</resultMap>
-	
-	<insert id="add" parameterType="com.liyong.model.User">
-		insert into t_user	values(null,#{num_},#{trueName},#{phone},#{sex_},#{menuIds}
-		,#{createDateTime},#{password},#{remark},#{type})
-	</insert>
-	
-	<update id="update" parameterType="com.liyong.model.User">
-		update t_user
-		<set>
-			<if test="trueName!=null  ">
-				trueName=#{trueName},
-			</if>
-			<if test="phone!=null  ">
-				phone=#{phone},
-			</if>
-			<if test="sex_!=null  ">
-				sex_=#{sex_},
-			</if>
-			<if test="menuIds!=null  ">
-				menuIds=#{menuIds},
-			</if>
-			<if test="password!=null and password!=''  ">
-				password=#{password},
-			</if>
-			<if test="remark!=null  ">
-				remark=#{remark},
-			</if>
-			
-			<if test="type!=null  ">
-				type=#{type},
->>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
 			</if>
 		</set>
 		where id=#{id}

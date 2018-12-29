@@ -68,18 +68,12 @@
             <bean class="com.liyong.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
-<<<<<<< HEAD
     
-    <!-- 消息发送监听器  -->
-	<bean id="messageSenderDestination" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg index="0" value="messageSenderQueue" />
-	</bean>
+
 	
-	<!--  -->
-	<bean id="employeeDestination" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg index="0" value="employeeQueue" />
-	</bean>
-    
-=======
->>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
+    <!--redis  配置 -->
+	<import resource="suport/redis-context.xml"/>
+	<!--activemq  配置 -->
+	<import resource="suport/activemq-context.xml"/>
+	
 </beans>
