@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jms.JMSException;
+
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.BasicDBObject;
@@ -13,6 +15,7 @@ import com.mongodb.DB;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
@@ -25,6 +28,9 @@ public class MongoUtil {
 	private static MongoTemplate mongoTemplate;
 	
 	public static void initMongoTemplate(final MongoTemplate springMongoTemplate) {
+		if (null == springMongoTemplate) {
+            throw new MongoException("未初始化springMongoTemplate！！");
+        }
 		mongoTemplate = springMongoTemplate; 
 	}
 	

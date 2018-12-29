@@ -10,24 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.liyong.common.vo.ValueObject;
 import com.liyong.model.Company;
 import com.liyong.model.Menu;
 import com.liyong.model.PageBean;
 import com.liyong.model.ResultDTO;
-import com.liyong.model.User;
 import com.liyong.service.CompanyService;
 import com.liyong.service.EmailUntilService;
 import com.liyong.service.MenuService;
-import com.liyong.suport.JmsUtil;
-import com.liyong.suport.RedisUtil;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
 
@@ -133,34 +128,7 @@ public class CompanyController {
 				treeMap.add(tMap);
 			}
 
-			//模拟发送邮件
-			/*String toUserEmilAddr = "768665210@qq.com";
-			String title = "账户验证邮件";
-			String templateName = "emialTemplate";
-			Map<String,Object> paramsMap = new HashMap<String,Object>();
-			paramsMap.put("userId", "张三");
-			paramsMap.put("yzm", Math.random()*1000);
-			emailUntilService.sendMailTemplateMessge(title, toUserEmilAddr, templateName, paramsMap, null); */
-
-			/*
-			System.out.println("发送推送消息。。。。start....");
-			ValueObject objs = new ValueObject();
-			objs.setJmsType("哈哈哈哈，这个是测试发送消息的。。。。");
-			JmsUtil.pushToMsgSenderQueue(objs);
-			JmsUtil.pushToEmployeeQueue(objs);
-			System.out.println("发送推送消息。。。。end....");*/
-			
-			
-			RedisUtil.redisSaveObject("text1", "1-----------------111111");
-
-			Object obj = RedisUtil.redisQueryObject("text1");
-			System.out.println("-------" + obj.toString());
-			
 			Gson g = new Gson();
-			
-			//System.out.println("jsonDate:");
-			//System.out.println(g.toJson(treeMap));
-			
 			ResponseUtil.write(response, g.toJson(treeMap));
 			return null;
 		}

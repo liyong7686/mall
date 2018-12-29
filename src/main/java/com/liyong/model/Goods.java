@@ -2,10 +2,14 @@ package com.liyong.model;
 
 import java.util.Date;
 
+import lombok.Data;
+
 /**
  * 商品信息
  * @author LY
  */
+
+@Data
 public class Goods {
 
 	private String id ;       //商品id
@@ -19,69 +23,6 @@ public class Goods {
 	private Date endTime ;    //上架结束时间
 	
 	private int activity;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescribes() {
-		return describes;
-	}
-	public void setDescribes(String describes) {
-		this.describes = describes;
-	}
-	public String getImgPath() {
-		return imgPath;
-	}
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
-	}
-
-	public String getCommodity() {
-		return commodity;
-	}
-	public void setCommodity(String commodity) {
-		this.commodity = commodity;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Date getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-	public Date getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	public int getActivity() {
-		return activity;
-	}
-	public void setActivity(int activity) {
-		this.activity = activity;
-	}
-	
 	
 	
 }

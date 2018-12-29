@@ -15,6 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.CollectionUtils;
 
+import io.lettuce.core.RedisException;
+
 /**
  * @ClassName: RedisUtil
  * @Description: 缓存保存工具类
@@ -32,9 +34,9 @@ public class RedisUtil {
      * TODO: 初始化RedisTemplate
      * @throws Exception 
      */
-    public static void initRedisTemplate(final RedisTemplate<String, Object> sprintRedisTemplate) throws Exception {
+    public static void initRedisTemplate(final RedisTemplate<String, Object> sprintRedisTemplate) throws RedisException {
     	if (null == sprintRedisTemplate) {
-            throw new Exception("未初始化redisTemplate！！");
+            throw new RedisException("未初始化redisTemplate！！");
         }
         redisTemplate = sprintRedisTemplate;
 

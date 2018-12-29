@@ -1,23 +1,31 @@
 package com.liyong.quarzt;
 
-import org.springframework.scheduling.annotation.Scheduled;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
+import com.liyong.service.WeixinCoreService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class Task {
 	
-	/*
-	@Scheduled(cron="* * * * ?") ÿ��ִ��һ��
-	@Scheduled(cron="0 * * * * ?") ÿ��ִ��һ��
-	@Scheduled(cron="0 0 * * * ?") ÿʱִ��һ��
-	@Scheduled(cron="0 0 0 * * ?") ÿ��ִ��һ��
-	@Scheduled(cron="0 0 10,11,14,16  *  *  ?") ÿ������10�㣬����2�㣬4��
-	*/
-
-
-	@Scheduled(cron="30 * * * * ?")
+	@Resource
+	private WeixinCoreService weixinCoreService;
+	
+	//@Scheduled(cron="10,25,35,45,55 * * * * ?")
 	public void weixin_token_task2() {
-		System.out.println("2222--------------2");
+		log.info("模拟后台不定时获取token:");
+		log.info(weixinCoreService.weixinToken(null));
+	}
+	
+	//刷新微信Token
+	//@Scheduled(cron="55 * * * * ?")
+	public void AccessToke(){
+		log.info("定时器每两小时刷新token");
+		log.info(weixinCoreService.freshenWxToKen());
 	}
 	
 }

@@ -1,5 +1,8 @@
 package com.liyong.service;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,11 +10,15 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.liyong.suport.RedisUtil;
 import com.liyong.until.WeixinMessageUtil;
 import com.liyong.until.weixin.TextMessage;
 
@@ -20,6 +27,12 @@ import com.liyong.until.weixin.TextMessage;
 public class WeixinCoreService {
 	
     private static Logger logger = LoggerFactory.getLogger(WeixinCoreService.class);
+    
+    @Value("${wechat.appid}")
+    private String appid; //微信号id
+    
+    @Value("${wechat.secret}")
+    private String secret; //微信scret
     
 	@Resource
 	private EmailUntilService emailUntilService;
@@ -152,5 +165,54 @@ public class WeixinCoreService {
 		return respMessage;
 	}
 
+	//每个公司一个微信号
+	public String weixinToken(String companyId){
+		String access_token = null;
+		
+		if(companyId == null){
+			companyId = "companyId";
+		}
+		
+        Object obj = RedisUtil.redisQueryObject("A_" + companyId + "_WeiXin_TOEKN");
+        if(obj != null && obj.toString() != null && obj.toString() != "" ){
+        	logger.info("== redis 存在 ====");
+        	access_token = obj.toString();
+        }else{
+        	logger.info("== 重新获取 ====");
+        	access_token = freshenWxToKen();
+        }
+        return access_token;
+	}
 
+	//刷新微信token
+	public String freshenWxToKen(){
+        String access_token = null;
+        String grant_type = "client_credential";
+        String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type="+grant_type+"&appid="+appid+"&secret="+secret;  
+        try {  
+            URL urlGet = new URL(url);  
+            HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();  
+            http.setRequestMethod("GET"); // 必须是get方式请求  
+            http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  
+            http.setDoOutput(true);  
+            http.setDoInput(true);  
+            http.connect();   
+            InputStream is = http.getInputStream();
+            int size = is.available();  
+            byte[] jsonBytes = new byte[size];  
+            is.read(jsonBytes);  
+            String message = new String(jsonBytes, "UTF-8");  
+            is.close();
+            
+            access_token = JSONObject.parseObject(message).getString("access_token");
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }
+        
+        //写入缓存数据库和真实数据库中
+        RedisUtil.redisSaveObject("A_companyId_WeiXin_TOEKN", access_token);
+		
+        return access_token;
+	}
+	
 }
