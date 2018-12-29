@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSON;
 import com.liyong.error.CommonErrorCode;
 import com.liyong.error.ErrorCodeException;
 import com.liyong.model.Session;
-<<<<<<< HEAD
 import com.liyong.model.SessionDTO;
 
 import okhttp3.OkHttpClient;
@@ -41,36 +40,7 @@ public class WechatAdapter {
             Response execute = okHttpClient.newCall(request).execute();
             if (execute.isSuccessful()) {
             	SessionDTO sessionDTO = JSON.parseObject(execute.body().string(), SessionDTO.class);
-=======
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-
-@Service
-public class WechatAdapter {
-    private final Logger logger = LoggerFactory.getLogger(WechatAdapter.class);
-
-    @Value("${wechat.appid}")
-    private String appid;
-
-    @Value("${wechat.secret}")
-    private String secret;
-
-
-    public Session jscode2session(String code) {
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-                .addHeader("content-type", "application/json")
-                .url(String.format(url, appid, secret, code))
-                .build();
-        try {
-            Response execute = okHttpClient.newCall(request).execute();
-            if (execute.isSuccessful()) {
-            	Session sessionDTO = JSON.parseObject(execute.body().string(), Session.class);
->>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
                 logger.info("jscode2session get url -> {}, info -> {}", String.format(url, appid, secret, code), JSON.toJSONString(sessionDTO));
                 return sessionDTO;
             } else {

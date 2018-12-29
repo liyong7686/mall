@@ -44,7 +44,6 @@ public class UserService {
 		return userMapper.findByNum(num);
 	}
 	
-<<<<<<< HEAD
 	public boolean saveOrUpdate(User user){
 		if(user.getId() != null){
 			userMapper.add(user);
@@ -53,7 +52,5 @@ public class UserService {
 		}
 		return true;
 	}
-	
-=======
->>>>>>> branch 'master' of https://github.com/liyong7686/mall.git
+
 }
