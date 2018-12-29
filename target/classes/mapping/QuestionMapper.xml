@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyong.dao.QuestionMapper">
+  <resultMap type="com.liyong.model.Question" id="QuestionResult">
+		<result property="id" column="id" />
+		<result property="userId" column="userId" />
+		<result property="title" column="title" />
+		<result property="commentCount" column="commentCount" />
+		<result property="viewCount" column="viewCount" />
+		<result property="likeCount" column="likeCount" />
+		<result property="status" column="status" />
+		<result property="content" column="content" />
+	</resultMap>
+	
+	<insert id="insertSelective" parameterType="com.liyong.model.Question">
+		insert into t_question values (#{id},#{userId},#{title},#{commentCount},#{viewCount},#{likeCount}
+		,#{status},#{content})
+	</insert>
+
+	
+	<select id="selectList" parameterType="com.liyong.model.Question" resultMap="QuestionResult">
+		select * from t_question
+		<where>
+			<if test="title !=null and title!=''">
+				and title like #{title}
+			</if>
+		</where>
+		order by id DESC
+	</select>
+	
+</mapper>

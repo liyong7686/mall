@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- 强制  高速模式 渲染网页    -->
+<meta NAME=”renderer” content=”webkit”>
+<!-- 强制  高速模式 渲染网页    -->
+<link href="../../../../static/favicon.ico" rel="shortcut icon" />
+<!--添加  jq  支持加载-->
+<script	src="../../../easy-ui/jquery.min.js"></script>
+<!--添加  jq  支持加载-->
+<!--添加 layui  支持加载-->
+<link rel="stylesheet"	href="../../../layui-v2.2.5/layui/css/layui.css">
+<script	src="../../../layui-v2.2.5/layui/layui.js"></script>
+<script	src="../../../js/common.js"></script>
+<!--添加 layui  支持加载-->
+
+<!-- 加入移动布局 -->
+<meta name="viewport"	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+<!-- 加入移动布局 -->
+
+<!--添加  vue.js 支持加载-->
+<script src="../../../vue/vue.min.js"></script>
+<!--添加  vue.js 支持加载-->
+
+<script>
+$(function(){
+	$("#status").val('[[${goods.status}]]');
+	$("#commodity").val('[[${goods.commodity}]]');
+	
+});
+
+var save_url = '[[${save_url}]]';
+function save(){
+	var index = layer.load(1, {
+		  shade: [0.1,'#fff'] //0.1透明度的白色背景
+	});
+	
+	var status = $("#status").val();
+	var commodity = $("#commodity").val();
+	$.post(save_url,{
+		name:app.name
+		,id:app.id
+		,describes:app.describes
+		,number:app.number
+		,status:status //此处是下拉框
+		,commodity:commodity //此处是下拉框
+		,startTime:app.startTime
+		,endTime:app.endTime
+		},function(result){
+			if(result.status == 1){
+				window.parent.closeDlg(result.message);
+			}else{
+				layer.closeAll();//关闭loading
+				layer.msg(result.message);
+			}
+	},'json');	
+}
+</script>
+<style>
+html, body {
+}
+.layui-form-item {
+    margin-bottom: 3px;
+}
+</style>
+</head>
+<body id="app">
+<div style="padding: 10px;">
+	<form class="layui-form layui-form-pane" id="formTag" action="itemEdit" method="POST" enctype="multipart/form-data">
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">商品名称</label>
+		    <div class="layui-input-block">
+		    	 <input type="hidden" id="id" name="id" th:value="${goods.id}" v-model="text" class="layui-input">
+			     <input type="text" id="name" autocomplete="off" th:value="${goods.name}" v-model="name" placeholder="请输入  菜单名称" class="layui-input">
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">库存数量</label>
+		    <div class="layui-input-block">
+			      <input type="number" id="number" autocomplete="off" th:value="${goods.number}" v-model="number" placeholder="请输入  库存数量" class="layui-input">
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">商品描述</label>
+		    <div class="layui-input-block">
+			      <input type="text" id="describes" autocomplete="off" th:value="${goods.describes}" v-model="describes" placeholder="请输入 商品描述" class="layui-input">
+		    </div>
+		  </div>
+		  		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">上架状态 </label>
+		    <div class="layui-input-block">
+			      <select name="status" id="status" lay-filter="aihao">
+			        <option value="0">未上架</option>
+			        <option value="1">上架</option>
+			      </select>
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">审核状态 </label>
+		    <div class="layui-input-block">
+			      <select name="commodity" id="commodity" lay-filter="aihao">
+			        <option value="0">未审核</option>
+			        <option value="1">审核通过</option>
+			        <option value="-1">审核不通过</option>
+			      </select>
+		    </div>
+		  </div>
+		   
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">上架开始时间</label>
+		    <div class="layui-input-block">
+		        <input type="text" class="layui-input" th:value="${goods.startTime}" name="startTime" v-model="startTime" id="startTime" placeholder="请输入 上架开始时间">
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">上架结束时间 </label>
+		    <div class="layui-input-block">
+		        <input type="text" class="layui-input" th:value="${goods.endTime}" name="endTime" id="endTime" v-model="endTime"  placeholder="请输入上架结束时间">
+		    </div>
+		  </div> 
+		  
+			<div class="layui-form-item">
+			  <label class="layui-form-label">商品图片</label>
+			  <div class="layui-input-block">
+				   <div class="layui-upload">
+					  <button type="button" class="layui-btn" id="test1">上传图片</button>
+					  <div class="layui-upload-list">
+					       <img class="layui-upload-img" id="demo1" style="width: 92px;height: 92px;margin: 0 10px 10px 0;">
+					       <p id="demoText"></p>
+					  </div>
+					</div>  
+			  </div>
+			</div>   
+
+ 
+	  
+	  </form>
+		<div class="site-demo-button" style="margin-top: 20px;">
+		  <button id="save" onclick="save()" class="layui-btn site-demo-layedit" data-type="content" th:text="${btn_text}"></button>
+		</div>
+</div>
+
+
+<script type="text/javascript" th:inline="none">
+
+layui.use([ 'laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element' ], function() {
+	var laydate = layui.laydate //日期
+	 , laypage = layui.laypage //分页
+	 , layer = layui.layer //弹层
+	 , table = layui.table //表格
+	 , carousel = layui.carousel //轮播
+	 , upload = layui.upload //上传
+	 , element = layui.element; //元素操作
+	
+	 laydate.render({
+	    elem: '#startTime'
+	    ,type: 'datetime'
+	 });
+	 laydate.render({
+	    elem: '#endTime'
+	    ,type: 'datetime'
+	 });
+	 
+	  //普通图片上传
+	  var uploadInst = upload.render({
+	    elem: '#test1'
+	    ,url: '/upload/image'
+	    ,before: function(obj){
+	      //预读本地文件示例，不支持ie8
+	      obj.preview(function(index, file, result){
+	          $('#demo1').attr('src', result); //图片链接（base64）
+	      });
+	    }
+	    ,done: function(res){
+	      //如果上传失败
+	      if(res.status == 0){
+	         return layer.msg('上传失败');
+	      }
+	      //上传成功
+	    }
+	    ,error: function(){
+	      //演示失败状态，并实现重传
+	      var demoText = $('#demoText');
+	      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+	      demoText.find('.demo-reload').on('click', function(){
+	        uploadInst.upload();
+	      });
+	    }
+	  });
+});
+</script>
+<script>
+var app = new Vue({
+	el : '#app',
+	data : {
+	}
+});
+ 
+</script>
+
+
+</body>
+</html>

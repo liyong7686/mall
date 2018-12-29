@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- 强制  高速模式 渲染网页    -->
+<meta NAME=”renderer” content=”webkit”>
+<!-- 强制  高速模式 渲染网页    -->
+<link href="../../../../static/favicon.ico" rel="shortcut icon" />
+<!--添加  jq  支持加载-->
+<script	src="../../../easy-ui/jquery.min.js"></script>
+<!--添加  jq  支持加载-->
+<!--添加 layui  支持加载-->
+<link rel="stylesheet"	href="../../../layui-v2.2.5/layui/css/layui.css">
+<script	src="../../../layui-v2.2.5/layui/layui.js"></script>
+<!--添加 layui  支持加载-->
+
+<!-- 加入移动布局 -->
+<meta name="viewport"	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+<!-- 加入移动布局 -->
+
+<!--添加  vue.js 支持加载-->
+<script src="../../../vue/vue.min.js"></script>
+<!--添加  vue.js 支持加载-->
+
+<script>
+$(function(){
+	$("#state").val('[[${menu.state}]]');
+	$("#father").val('[[${menu.father}]]');
+});
+
+var save_url = '[[${save_url}]]';
+function save(){
+	var index = layer.load(1, {
+		  shade: [0.1,'#fff'] //0.1透明度的白色背景
+	});
+	
+	var state = $("#state").val();
+	var father = $("#father").val();
+	$.post(save_url,{
+		text:app.text
+		,url:app.url
+		,state:state //此处是下拉框
+		,father:father //此处是下拉框
+		,iconCls:app.iconCls
+		},function(result){
+			if(result.status == 1){
+				//调用 父窗口的  关闭所有窗口 并且刷新 页面
+				window.parent.closeDlg(result.message);
+			}else{
+				layer.closeAll();//关闭loading
+				layer.msg(result.message);
+			}
+	},'json');	
+}
+</script>
+<style>
+html, body {
+}
+.layui-form-item {
+    margin-bottom: 3px;
+}
+</style>
+</head>
+<body id="app">
+	
+<div style="padding: 10px;">
+	<form class="layui-form layui-form-pane">
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">菜单名称</label>
+		    <div class="layui-input-block">
+			      <input type="text" id="text" autocomplete="off" th:value="${menu.text}" v-model="text" placeholder="请输入  菜单名称" class="layui-input">
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">父节点id</label>
+		    <div class="layui-input-block">
+		         <select id="father" name="father" lay-filter="aihao">
+		             <option th:each="c:${parentMenulist}" th:value="${c.id}" th:text="${c.text}">菜单</option>
+		         </select>
+			     <!-- input type="text" id="father" autocomplete="off" th:value="${menu.father}" v-model="father" placeholder="请输入  父节点id" class="layui-input" -->
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">状态 </label>
+		    <div class="layui-input-block">
+			      <select name="interest" id="state" lay-filter="aihao">
+			        <option value="close">关闭</option>
+			        <option value="opend">开启</option>
+			      </select>
+		    </div>
+		  </div>
+		  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">iconCls</label>
+		    <div class="layui-input-block">
+			      <input type="text" id="iconCls" autocomplete="off" v-model="iconCls" th:value="${menu.iconCls}" placeholder="请输入iconCls" class="layui-input">
+		    </div>
+		  </div>
+	      
+	      <div class="layui-form-item">
+		    <label class="layui-form-label">地址URL</label>
+		    <div class="layui-input-block">
+			      <input type="text" id="url" autocomplete="off" v-model="url" th:value="${menu.url}" placeholder="请输入URL" class="layui-input">
+		    </div>
+		  </div>	  
+	  
+	  </form>
+		<div class="site-demo-button" style="margin-top: 20px;">
+		  <button id="save" onclick="save()" class="layui-btn site-demo-layedit" data-type="content" th:text="${btn_text}"></button>
+		</div>
+</div>
+
+
+<script>
+layui.use([ 'laydate', 'laypage', 'layer', 'table', 'carousel',
+		'upload', 'element' ], function() {
+	var laydate = layui.laydate //日期
+	, laypage = layui.laypage //分页
+	layer = layui.layer //弹层
+	, table = layui.table //表格
+	, carousel = layui.carousel //轮播
+	, upload = layui.upload //上传
+	, element = layui.element; //元素操作
+});
+</script>
+<script>
+var app = new Vue({
+	el : '#app',
+	data : {
+	}
+});
+ 
+</script>
+
+
+</body>
+</html>
