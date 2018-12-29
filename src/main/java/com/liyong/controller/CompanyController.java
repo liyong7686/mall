@@ -20,9 +20,9 @@ import com.liyong.model.Company;
 import com.liyong.model.Menu;
 import com.liyong.model.PageBean;
 import com.liyong.model.ResultDTO;
-import com.liyong.service.CompanyService;
-import com.liyong.service.EmailUntilService;
-import com.liyong.service.MenuService;
+import com.liyong.service.ICompanyService;
+import com.liyong.service.IEmailUntilService;
+import com.liyong.service.IMenuService;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
 
@@ -31,11 +31,11 @@ import com.liyong.until.StringUtil;
 public class CompanyController {
 	  
 	@Resource
-	private MenuService menuService;
+	private IMenuService menuService;
 	@Resource
-	private CompanyService companyService;
+	private ICompanyService companyService;
 	@Resource
-	private EmailUntilService emailUntilService;
+	private IEmailUntilService emailUntilService;
 
 	    //查询菜单视图
 		@RequestMapping("/manage")

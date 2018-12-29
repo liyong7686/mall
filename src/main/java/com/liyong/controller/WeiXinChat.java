@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liyong.service.EmailUntilService;
-import com.liyong.service.WeixinCoreService;
+import com.liyong.service.IWeixinCoreService;
 
 
 @RestController
@@ -29,7 +26,7 @@ import com.liyong.service.WeixinCoreService;
 public class WeiXinChat {
 
 	@Resource
-	private WeixinCoreService weixinCoreService;
+	private IWeixinCoreService weixinCoreService;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 

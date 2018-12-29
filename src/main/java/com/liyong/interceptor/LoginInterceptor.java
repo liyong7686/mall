@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.liyong.error.CommonErrorCode;
 import com.liyong.model.ResultDTO;
 import com.liyong.model.User;
-import com.liyong.service.UserService;
+import com.liyong.service.IUserService;
 import com.liyong.until.SessionUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

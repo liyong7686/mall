@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -23,7 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.liyong.model.PageBean;
 import com.liyong.model.ResultDTO;
 import com.liyong.model.User;
-import com.liyong.service.UserService;
+import com.liyong.service.IUserService;
 import com.liyong.until.CryptographyUtil;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
@@ -33,7 +32,7 @@ import com.liyong.until.StringUtil;
 public class UserController {
 
 	@Resource
-	private UserService  userService;
+	private IUserService  userService;
 	
 	/**
 	 * /user/login

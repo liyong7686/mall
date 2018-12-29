@@ -18,7 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.liyong.model.Goods;
 import com.liyong.model.PageBean;
 import com.liyong.model.ResultDTO;
-import com.liyong.service.GoodsService;
+import com.liyong.service.IGoodsService;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
 
@@ -27,7 +27,7 @@ import com.liyong.until.StringUtil;
 public class GoodsController {
 	
 	@Resource
-	private GoodsService goodsService;
+	private IGoodsService goodsService;
 
 	//查询菜单视图
 		@RequestMapping("/manage")

@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.liyong.model.Menu;
 import com.liyong.model.User;
-import com.liyong.service.MenuService;
-import com.liyong.service.UserService;
+import com.liyong.service.IMenuService;
+import com.liyong.service.IUserService;
 import com.liyong.until.MyUtil;
 import com.liyong.until.StringUtil;
 
@@ -29,9 +29,9 @@ import com.liyong.until.StringUtil;
 public class MyRealm extends AuthorizingRealm{
 
 	@Resource
-	private UserService  userService;
+	private IUserService  userService;
 	@Resource
-	private MenuService  treeService;
+	private IMenuService  treeService;
 	
 
 	@Override

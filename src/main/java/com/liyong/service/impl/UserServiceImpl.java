@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.liyong.dao.UserMapper;
 import com.liyong.model.User;
+import com.liyong.service.IUserService;
 
 @Service
-public class UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;

@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.liyong.service.WeixinCoreService;
+import com.liyong.service.IWeixinCoreService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Task {
 	
 	@Resource
-	private WeixinCoreService weixinCoreService;
+	private IWeixinCoreService weixinCoreService;
 	
 	//@Scheduled(cron="10,25,35,45,55 * * * * ?")
 	public void weixin_token_task2() {

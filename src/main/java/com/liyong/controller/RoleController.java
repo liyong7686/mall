@@ -21,21 +21,20 @@ import com.liyong.model.PageBean;
 import com.liyong.model.ResultDTO;
 import com.liyong.model.Role;
 import com.liyong.model.RoleMenu;
-import com.liyong.service.MenuService;
-import com.liyong.service.RoleService;
+import com.liyong.service.IMenuService;
+import com.liyong.service.IRoleService;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Controller
 @RequestMapping("/role")
 public class RoleController {
 
 	@Resource
-	private RoleService  roleService;
+	private IRoleService  roleService;
 	
 	@Resource
-	private MenuService menuService;
+	private IMenuService menuService;
 	
 	//查询菜单视图
 		@RequestMapping("/manage")

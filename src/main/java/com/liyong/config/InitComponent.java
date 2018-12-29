@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import com.liyong.model.Config;
-import com.liyong.service.ConfigService;
+import com.liyong.service.IConfigService;
 
 @Component
 public class InitComponent implements ServletContextListener,ApplicationContextAware{
@@ -19,7 +19,7 @@ public class InitComponent implements ServletContextListener,ApplicationContextA
 	
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext application=sce.getServletContext();
-		ConfigService configService=(ConfigService) applicationContext.getBean("configService");
+		IConfigService configService=(IConfigService) applicationContext.getBean("configService");
 		
 		System.out.println("InitComponent.java .........初始到全局缓存中 把config  ...........start........ ");
 		//把config  初始到全局缓存中

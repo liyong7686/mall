@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +11,14 @@ import com.liyong.dao.MenuMapper;
 import com.liyong.model.Menu;
 import com.liyong.model.RoleMenu;
 import com.liyong.model.User;
+import com.liyong.service.IMenuService;
 import com.liyong.until.CreateTablePrimaryId;
 import com.liyong.until.MyUtil;
 
 
 
 @Service
-public class MenuService{
+public class MenuServiceImpl implements IMenuService{
 	
 	@Autowired
 	private MenuMapper menuMapper;

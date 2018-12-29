@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ import com.liyong.model.ResultDTO;
 import com.liyong.model.SessionDTO;
 import com.liyong.model.TokenDTO;
 import com.liyong.model.User;
-import com.liyong.service.UserService;
+import com.liyong.service.IUserService;
 import com.liyong.until.DigestUtil;
 
 //微信小程序接口
@@ -34,7 +33,7 @@ public class LoginController {
     @Resource
     private WechatAdapter wechatAdapter;
 	@Resource
-	private UserService  userService;
+	private IUserService  userService;
     
 	@RequestMapping("/login")
     public ResultDTO login(@RequestBody LoginDTO loginDTO) {

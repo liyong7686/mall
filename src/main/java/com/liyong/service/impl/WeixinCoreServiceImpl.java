@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -18,15 +18,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.liyong.service.IEmailUntilService;
+import com.liyong.service.IWeixinCoreService;
 import com.liyong.suport.RedisUtil;
 import com.liyong.until.WeixinMessageUtil;
 import com.liyong.until.weixin.TextMessage;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
-public class WeixinCoreService {
+public class WeixinCoreServiceImpl implements IWeixinCoreService {
 	
-    private static Logger logger = LoggerFactory.getLogger(WeixinCoreService.class);
     
     @Value("${wechat.appid}")
     private String appid; //微信号id
@@ -35,11 +38,11 @@ public class WeixinCoreService {
     private String secret; //微信scret
     
 	@Resource
-	private EmailUntilService emailUntilService;
+	private IEmailUntilService emailUntilService;
 	
 	public String processRequest(HttpServletRequest request, HttpServletResponse response) {
 		
-		logger.info("------------微信消息开始处理-------------");
+		log.info("------------微信消息开始处理-------------");
 		// 返回给微信服务器的消息,默认为null
 		String respMessage = null;
 		try {
@@ -57,7 +60,7 @@ public class WeixinCoreService {
 			System.out.println("fromUserName--->"+fromUserName);
 			System.out.println("msgType--->"+msgType);
 
-			logger.info("fromUserName is:" +fromUserName+" toUserName is:" +toUserName+" msgType is:" +msgType);
+			log.info("fromUserName is:" +fromUserName+" toUserName is:" +toUserName+" msgType is:" +msgType);
 			
 			// 分析用户发送的消息类型，并作出相应的处理
 			
@@ -154,7 +157,7 @@ public class WeixinCoreService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("系统出错");
+			log.error("系统出错");
 			System.err.println("系统出错");
 			respMessage = null;
 		} finally{
@@ -175,10 +178,10 @@ public class WeixinCoreService {
 		
         Object obj = RedisUtil.redisQueryObject("A_" + companyId + "_WeiXin_TOEKN");
         if(obj != null && obj.toString() != null && obj.toString() != "" ){
-        	logger.info("== redis 存在 ====");
+        	log.info("== redis 存在 ====");
         	access_token = obj.toString();
         }else{
-        	logger.info("== 重新获取 ====");
+        	log.info("== 重新获取 ====");
         	access_token = freshenWxToKen();
         }
         return access_token;

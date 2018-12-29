@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.liyong.dao.GoodsMapper;
 import com.liyong.model.Goods;
+import com.liyong.service.IGoodsService;
 import com.liyong.until.CreateTablePrimaryId;
 
 
 
 @Service
-public class GoodsService{
+public class GoodsServiceImpl implements IGoodsService{
 	
 	@Autowired
 	private GoodsMapper goodsMapper;

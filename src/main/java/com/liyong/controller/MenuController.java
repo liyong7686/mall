@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.liyong.model.Menu;
 import com.liyong.model.PageBean;
 import com.liyong.model.ResultDTO;
-import com.liyong.model.Menu;
 import com.liyong.model.User;
-import com.liyong.service.MenuService;
-import com.liyong.service.UserService;
-import com.liyong.until.CryptographyUtil;
+import com.liyong.service.IMenuService;
+import com.liyong.service.IUserService;
 import com.liyong.until.MyUtil;
 import com.liyong.until.ResponseUtil;
 import com.liyong.until.StringUtil;
@@ -32,9 +31,9 @@ import com.liyong.until.StringUtil;
 public class MenuController {
 
 	@Resource
-	private MenuService menuService;
+	private IMenuService menuService;
 	@Resource
-	private UserService  userService;
+	private IUserService  userService;
 	
 	//查询菜单视图
 	@RequestMapping("/manage")

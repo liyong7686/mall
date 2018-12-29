@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.util.List;
 
@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.liyong.dao.QuestionMapper;
 import com.liyong.model.Question;
+import com.liyong.service.IQuestionService;
 import com.liyong.until.SessionUtil;
 
 @Service
-public class QuestionService {
+public class QuestionServiceImpl implements IQuestionService {
 
 	@Autowired
     private QuestionMapper questionMapper;

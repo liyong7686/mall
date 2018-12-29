@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,16 +13,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.liyong.model.Menu;
 import com.liyong.model.User;
+import com.liyong.service.IMenuService;
+import com.liyong.service.IPublicService;
+import com.liyong.service.IUserService;
 import com.liyong.until.MyUtil;
 
 
 
 @Service
-public class PublicService {
+public class PublicServiceImpl implements IPublicService {
 	@Resource
-	private MenuService treeService;
+	private IMenuService treeService;
 	@Resource
-	private UserService userService;
+	private IUserService userService;
  
 	
 	public void addLeftMenu(Model model) {

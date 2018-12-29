@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.io.File;
 import java.util.Map;
@@ -18,13 +18,15 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.liyong.service.IEmailUntilService;
+
 /**
  * 发送邮件信息
  * @author LY
  *  http://www.ityouknow.com
  */
 @Service
-public class EmailUntilService {
+public class EmailUntilServiceImpl implements IEmailUntilService {
 
 private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	

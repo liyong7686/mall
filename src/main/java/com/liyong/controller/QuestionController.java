@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.liyong.error.CommonErrorCode;
 import com.liyong.model.Question;
 import com.liyong.model.ResultDTO;
-import com.liyong.service.QuestionService;
+import com.liyong.service.IQuestionService;
 
 //微信小程序接口
 @RestController
@@ -25,7 +25,7 @@ public class QuestionController {
     private final Logger log = LoggerFactory.getLogger(LoginController.class);
     
 	@Resource
-    private QuestionService questionService;
+    private IQuestionService questionService;
 
     @RequestMapping(value = "/question", method = RequestMethod.POST)
     public ResultDTO post(@RequestBody Question question) {

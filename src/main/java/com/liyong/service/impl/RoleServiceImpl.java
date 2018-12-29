@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 import com.liyong.dao.RoleMapper;
 import com.liyong.model.Role;
 import com.liyong.model.RoleMenu;
+import com.liyong.service.IRoleService;
 import com.liyong.until.CreateTablePrimaryId;
 import com.liyong.until.StringUtil;
 
 @Service
-public class RoleService {
+public class RoleServiceImpl implements IRoleService{
 	@Autowired
 	private RoleMapper roleMapper;
 	

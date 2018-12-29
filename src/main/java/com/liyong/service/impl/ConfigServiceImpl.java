@@ -1,4 +1,4 @@
-package com.liyong.service;
+package com.liyong.service.impl;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -9,9 +9,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.liyong.dao.ConfigMapper;
 import com.liyong.model.Config;
+import com.liyong.service.IConfigService;
 
-@Service
-public class ConfigService {
+@Service("configService")
+public class ConfigServiceImpl implements IConfigService {
 
 	@Resource
 	private ConfigMapper configMapper;

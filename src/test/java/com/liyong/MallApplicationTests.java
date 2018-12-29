@@ -6,13 +6,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.jms.JMSException;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.liyong.common.vo.ValueObject;
-import com.liyong.service.EmailUntilService;
+import com.liyong.service.IEmailUntilService;
 import com.liyong.suport.JmsUtil;
 import com.liyong.suport.RedisUtil;
 
@@ -21,7 +20,7 @@ import com.liyong.suport.RedisUtil;
 public class MallApplicationTests {
 
 	@Resource
-	private EmailUntilService emailUntilService;	
+	private IEmailUntilService emailUntilService;	
 	
 	public void testEmail(){
 		String toUserEmilAddr = "768665210@qq.com";

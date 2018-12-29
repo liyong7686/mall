@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.liyong.service.PublicService;
+import com.liyong.service.IPublicService;
 import com.liyong.until.MyUtil;
 
 @Controller
 public class IndexController {
 	
 	@Resource
-	private PublicService publicService;
+	private IPublicService publicService;
 
 	@RequestMapping("/")
 	public String index(HttpServletResponse response,HttpServletRequest request )throws Exception{		
