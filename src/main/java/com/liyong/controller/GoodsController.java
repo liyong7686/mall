@@ -33,8 +33,8 @@ public class GoodsController {
 		@RequestMapping("/manage")
 		public String manage(Model model) throws Exception {
 			model.addAttribute("pageTitle", "商品管理");
-			model.addAttribute("title", "商品管理");
-			return "pc/page/goods/goods_manage";
+			model.addAttribute("title",   "商品管理");
+			return "pc/page/goods/goods_manage";   
 		}
 	    //查询菜单视图数据	
 		@RequestMapping("/list")
